@@ -1,0 +1,11 @@
+## ウィンドウ分割の設定
+split-window -v -c "#{pane_current_path}"
+select-pane -t 0
+split-window -h -c "#{pane_current_path}"
+select-pane -t 0
+split-window -v -c "#{pane_current_path}"
+
+# メインとなるウィンドウの高さを35行に設定
+select-pane -t 2
+resize-pane -L -t 2 40
+resize-pane -D -t 2 15
