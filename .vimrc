@@ -1,67 +1,178 @@
-" setting
-"文字コードをUFT-8に設定
-set fenc=utf-8
-" バックアップファイルを作らない
-set nobackup
-" スワップファイルを作らない
-set noswapfile
-" 編集中のファイルが変更されたら自動で読み直す
-set autoread
-" バッファが編集中でもその他のファイルを開けるように
-set hidden
-" 入力中のコマンドをステータスに表示する
-set showcmd
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" jjでESC
-inoremap <silent> jj <ESC>
+Plugin 'VundleVim/Vundle.vim'
 
-" 見た目系
-" 行番号を表示
+" 導入したいプラグインを以下に列挙
+" Plugin '[Github Author]/[Github repo]' の形式で記入
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mattn/vim-sqlfmt'
+Plugin 'deton/jasegment.vim'
+Plugin 'skanehira/translate.vim'
+Plugin 'fatih/vim-go'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Lokaltog/vim-easymotion'
+call vundle#end()
+
+"エンコーディング
+"GUI版使ってるなら無効にした方がいいらしいです
+set encoding=utf-8
+scriptencoding utf-8
+
+"カーソル位置表示
+set ruler
+"行番号表示
 set number
-" 現在の行を強調表示
-set cursorline
-" 現在の行を強調表示（縦）
-set cursorcolumn
-" 行末の1文字先までカーソルを移動できるように
-set virtualedit=onemore
-" インデントはスマートインデント
-set smartindent
-" ビープ音を可視化
-set visualbell
-" 括弧入力時の対応する括弧を表示
-set showmatch
-" ステータスラインを常に表示
-set laststatus=2
-" コマンドラインの補完
-set wildmode=list:longest
-" 折り返し時に表示行単位での移動できるようにする
-nnoremap j gj
-nnoremap k gk
-" シンタックスハイライトの有効化
+"カラーテーマ
+set t_Co=256
+set background=dark
+colorscheme iceberg
+
+"行番号の色や現在行の設定
+ autocmd ColorScheme * highlight LineNr ctermfg=12
+ highlight CursorLineNr ctermbg=4 ctermfg=0
+ set cursorline
+ highlight clear CursorLine
+ augroup TransparentBG
+ autocmd!
+  autocmd Colorscheme * highlight Normal ctermbg=none
+  autocmd Colorscheme * highlight NonText ctermbg=none
+  autocmd Colorscheme * highlight LineNr ctermbg=none
+  autocmd Colorscheme * highlight Folded ctermbg=none
+  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
+ augroup END
+
+"シンタックスハイライト
 syntax enable
 
+"オートインデント
+set autoindent
 
-" Tab系
-" 不可視文字を可視化(タブが「▸-」と表示される)
-set list listchars=tab:\▸\-
-" Tab文字を半角スペースにする
+" vim-airline-theme
+let g:airline_theme = 'bubblegum'
+
+"インデント幅
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+"タブをスペースに変換
 set expandtab
-" 行頭以外のTab文字の表示幅（スペースいくつ分）
-set tabstop=2
-" 行頭でのTab文字の表示幅
-set shiftwidth=2
+set smarttab
 
+"ビープ音すべてを無効にする
+set visualbell t_vb=
 
-" 検索系
-" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
-set ignorecase
-" 検索文字列に大文字が含まれている場合は区別して検索する
-set smartcase
-" 検索文字列入力時に順次対象文字列にヒットさせる
-set incsearch
-" 検索時に最後まで行ったら最初に戻る
-set wrapscan
-" 検索語をハイライト表示
+"長い行の折り返し表示
+set wrap
+
+"検索設定
+"インクリメンタルサーチしない
+set noincsearch
+"ハイライト
 set hlsearch
-" ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+"大文字と小文字を区別しない
+set ignorecase
+"大文字と小文字が混在した検索のみ大文字と小文字を区別する
+set smartcase
+"最後尾になったら先頭に戻る
+set wrapscan
+"置換の時gオプションをデフォルトで有効にする
+set gdefault
+
+"不可視文字の設定
+set list
+set listchars=tab:>-,eol:↲,extends:»,precedes:«,nbsp:%
+
+"コマンドラインモードのファイル補完設定
+set wildmode=list:longest,full
+
+"入力中のコマンドを表示
+set showcmd
+
+"クリップボードの共有
+set clipboard=unnamed,autoselect
+
+"カーソル移動で行をまたげるようにする
+set whichwrap=b,s,h,l,<,>,~,[,]
+
+"バックスペースを使いやすく
+set backspace=indent,eol,start
+set nrformats-=octal
+
+set pumheight=10
+
+"対応する括弧に一瞬移動
+set showmatch
+set matchtime=1
+source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
+
+"ウィンドウの最後の行もできるだけ表示
+set display=lastline
+
+"変更中のファイルでも保存しないで他のファイルを表示する
+set hidden
+
+"バックアップファイルを作成しない
+set nobackup
+"アンドゥファイルを作成しない
+set noundofile
+"スワップファイルを作成しない
+set noswapfile
+
+""""""""""""""""""""""""""""""
+
+"カーソル移動
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+nnoremap x "_x
+nnoremap s "_s
+noremap <S-h> ^
+noremap <S-j> }
+noremap <S-k> {
+noremap <S-l> $
+
+"jjでノーマルモード
+inoremap <silent> jj <ESC>
+inoremap <silent> ddd <C-R>=strftime("%Y-%m-%d")<CR> 
+inoremap <silent> ttt <C-R>=strftime("%H:%M:%S")<CR>
+
+"Yで行末までヤンク
+nnoremap Y y$
+
+"ESCキー2度押しでハイライトの切り替え
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+"ビジュアルモードで連続ペーストする
+vnoremap p "_dP
+
+"easy-motion
+let g:EasyMotion_leader_key = '<Space><Space>'
+map f <Plug>(easymotion-f)
+map t <Plug>(easymotion-t)
+map F <Plug>(easymotion-F)
+map T <Plug>(easymotion-T)
+
+"ペースト時に自動インデントで崩れるのを防ぐ
+" if &term =~ "xterm"
+"     let &t_SI .= "\e[?2004h"
+"     let &t_EI .= "\e[?2004l"
+"     let &pastetoggle = "\e[201~"
+" 
+"     function XTermPasteBegin(ret)
+"         set paste
+"         return a:ret
+"     endfunction
+" 
+"     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+" endif
+
+filetype plugin indent on
