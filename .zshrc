@@ -12,7 +12,7 @@ export PATH=$PATH:$HOME/.nodebrew/current/bin
 export PATH=$PATH:$HOME/dev/flutter/bin
 
 ## エイリアス
-alias ll='ls -Gl'
+alias ll='exa -l'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cl='clear'
@@ -54,7 +54,6 @@ function tmux_automatically_attach_session()
         ! is_exists 'tmux' && return 1
 
         if is_tmux_runnning; then
-            echo from TMUX
         elif is_screen_running; then
             echo "This is on screen."
         fi

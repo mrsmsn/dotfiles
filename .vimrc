@@ -52,7 +52,7 @@ colorscheme iceberg
 syntax enable
 
 "オートインデント
-set autoindent
+set noautoindent
 
 " vim-airline-theme
 let g:airline_theme = 'bubblegum'
@@ -135,10 +135,6 @@ nnoremap gj j
 nnoremap gk k
 nnoremap x "_x
 nnoremap s "_s
-noremap <S-h> ^
-noremap <S-j> }
-noremap <S-k> {
-noremap <S-l> $
 
 "jjでノーマルモード
 inoremap <silent> jj <ESC>
@@ -175,4 +171,4 @@ map T <Plug>(easymotion-T)
 "     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 " endif
 
-filetype plugin indent on
+"filetype plugin indent on
