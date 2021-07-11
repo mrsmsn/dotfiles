@@ -1,0 +1,69 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.confirmDelete": false,
+  "editor.snippetSuggestions": "top",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "markdownlint.config": {
+    "default": true,
+    "MD007": { "indent": 4 }
+  },
+  "[plaintext]": {
+    "editor.quickSuggestions": true,
+    "editor.acceptSuggestionOnEnter": false
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["f"],
+      "after": ["leader", "leader", "f"]
+    },
+    {
+      "before": ["F"],
+      "after": ["leader", "leader", "F"]
+    },
+    {
+      "before": ["x"],
+      "after": ["\"", "_", "x"]
+    },
+    {
+      "before": ["s"],
+      "after": ["\"", "_", "s"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["p"],
+      "after": ["\"", "_", "d", "P"]
+    }
+  ],
+  "vim.whichwrap": "h,l,<,>,[,],b,s",
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.easymotion": true,
+  "vim.visualstar": true,
+  "vim.useCtrlKeys": true,
+  "workbench.colorTheme": "One Monokai",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.activityBar.visible": false,
+  "window.zoomLevel": 1
+}
