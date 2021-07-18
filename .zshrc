@@ -33,7 +33,13 @@ bindkey '^]' peco-src
 
 ### pecoでhistory検索
 function peco-select-history() {
-    BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | eval $tac | awk '!a[$0]++' | peco --query "$LBUFFER")
     CURSOR=$#BUFFER
 }
 zle -N peco-select-history
