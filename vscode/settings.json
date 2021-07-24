@@ -65,5 +65,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.activityBar.visible": false,
-  "window.zoomLevel": 1
+  "window.newWindowDimensions": "maximized",
+  "editor.minimap.enabled": false,
 }
