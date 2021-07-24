@@ -19,7 +19,13 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'mattn/vim-lsp-settings'
+Plugin 'mattn/vim-lsp-icons'
+Plugin 'mattn/vim-goimports'
+Plugin 'hrsh7th/vim-vsnip'
+Plugin 'hrsh7th/vim-vsnip-integ'
 call vundle#end()
 
 "エンコーディング
@@ -58,6 +64,10 @@ set noautoindent
 
 " vim-airline-theme
 let g:airline_theme = 'bubblegum'
+
+" vim-lsp
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
 
 "インデント幅
 set shiftwidth=4
@@ -151,6 +161,9 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
 "ビジュアルモードで連続ペーストする
 vnoremap p "_dP
+
+"保存時にLspDocumentFormatで自動フォーマット
+autocmd BufWritePre <buffer> LspDocumentFormat
 
 "easy-motion
 let g:EasyMotion_leader_key = '<Space><Space>'
