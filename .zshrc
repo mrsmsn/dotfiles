@@ -16,6 +16,7 @@ alias ll='exa -l'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cl='clear'
+alias cal='jpcal'
 
 ## 関数
 
