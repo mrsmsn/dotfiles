@@ -22,7 +22,7 @@ alias cal='jpcal'
 
 ### ソース一覧に飛ぶやつ
 function peco-src() {
-    local selected_dir=$(ls -d ~/src/* | peco --query "$LBUFFER")
+    local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
