@@ -8,8 +8,6 @@ source $ZSH/oh-my-zsh.sh
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$HOME/.nodebrew/current/bin
-export PATH=$PATH:$HOME/dev/flutter/bin
 
 ## エイリアス
 alias ll='exa -l'
