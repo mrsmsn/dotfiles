@@ -10,7 +10,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 ## エイリアス
-alias ll='exa -l'
+alias ll='lsd -l'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cal='jpcal'
