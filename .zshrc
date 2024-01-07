@@ -18,30 +18,24 @@ alias cal='jpcal'
 ## 関数
 
 ### ソース一覧に飛ぶやつ
-function peco-src() {
-    local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+function fzf-src() {
+    local selected_dir=$(ghq list -p | fzf --reverse --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
     fi
     zle clear-screen
 }
-zle -N peco-src
-bindkey '^]' peco-src
+zle -N fzf-src
+bindkey '^]' fzf-src
 
-### pecoでhistory検索
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(history -n 1 | eval $tac | awk '!a[$0]++' | peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
+### fzfでhistory検索
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --reverse  --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
 }
-zle -N peco-select-history
-bindkey '^r' peco-select-history
+zle -N select-history
+bindkey '^r' select-history
 
 ##tmuxを自動で起動する奴
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
