@@ -19,7 +19,7 @@ alias cal='jpcal'
 
 ### ソース一覧に飛ぶやつ
 function fzf-src() {
-    local selected_dir=$(ghq list -p | fzf --reverse --query "$LBUFFER")
+    local selected_dir=$(ghq list -p | fzf --reverse --query "$LBUFFER" --prompt="Repo >" )
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
