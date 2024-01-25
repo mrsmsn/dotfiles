@@ -1,50 +1,33 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$HOME/.nodebrew/current/bin
-export PATH=$PATH:$HOME/dev/flutter/bin
 
 ## エイリアス
-alias ll='exa -l'
+alias ll='lsd -al'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
-alias cl='clear'
 alias cal='jpcal'
 
 ## 関数
 
 ### ソース一覧に飛ぶやつ
-function peco-src() {
-    local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+function fzf-src() {
+    local selected_dir=$(ghq list -p | fzf --reverse --query "$LBUFFER" --prompt="Repo >" )
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
     fi
     zle clear-screen
 }
-zle -N peco-src
-bindkey '^]' peco-src
+zle -N fzf-src
+bindkey '^]' fzf-src
 
-### pecoでhistory検索
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(history -n 1 | eval $tac | awk '!a[$0]++' | peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
+### fzfでhistory検索
+function select-history() {
+  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf --reverse  --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
 }
-zle -N peco-select-history
-bindkey '^r' peco-select-history
+zle -N select-history
+bindkey '^r' select-history
 
 ##tmuxを自動で起動する奴
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
@@ -114,3 +97,5 @@ export SAVEHIST=100000
 setopt hist_ignore_dups
 # 開始と終了を記録
 setopt EXTENDED_HISTORY
+
+eval "$(starship init zsh)"

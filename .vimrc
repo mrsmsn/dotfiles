@@ -9,6 +9,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin '[Github Author]/[Github repo]' の形式で記入
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mattn/vim-sqlfmt'
+Plugin 'mattn/vim-lsp-settings'
+Plugin 'mattn/vim-lsp-icons'
+Plugin 'mattn/vim-goimports'
 Plugin 'deton/jasegment.vim'
 Plugin 'skanehira/translate.vim'
 Plugin 'fatih/vim-go'
@@ -21,11 +24,9 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'prabirshrestha/vim-lsp'
 Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
-Plugin 'mattn/vim-lsp-settings'
-Plugin 'mattn/vim-lsp-icons'
-Plugin 'mattn/vim-goimports'
 Plugin 'hrsh7th/vim-vsnip'
 Plugin 'hrsh7th/vim-vsnip-integ'
+Plugin 'cocopon/iceberg.vim'
 call vundle#end()
 
 "エンコーディング
