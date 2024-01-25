@@ -14,8 +14,12 @@
     "MD007": { "indent": 4 }
   },
   "[plaintext]": {
-    "editor.quickSuggestions": true,
-    "editor.acceptSuggestionOnEnter": false
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.acceptSuggestionOnEnter": "off"
   },
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
