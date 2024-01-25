@@ -68,7 +68,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.activityBar.visible": false,
   "window.newWindowDimensions": "maximized",
   "editor.minimap.enabled": false,
+  "workbench.activityBar.location": "hidden",
 }
