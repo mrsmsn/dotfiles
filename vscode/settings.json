@@ -1,4 +1,6 @@
 {
+  "editor.fontFamily": "HackGen Console NF",
+  "terminal.integrated.fontFamily": "HackGen Console NF",
   "workbench.iconTheme": "material-icon-theme",
   "explorer.confirmDelete": false,
   "editor.snippetSuggestions": "top",
@@ -14,8 +16,12 @@
     "MD007": { "indent": 4 }
   },
   "[plaintext]": {
-    "editor.quickSuggestions": true,
-    "editor.acceptSuggestionOnEnter": false
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.acceptSuggestionOnEnter": "off"
   },
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -60,11 +66,11 @@
   "vim.easymotion": true,
   "vim.visualstar": true,
   "vim.useCtrlKeys": true,
-  "workbench.colorTheme": "One Monokai",
+  "workbench.colorTheme": "Sapphire (Dim)",
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.activityBar.visible": false,
   "window.newWindowDimensions": "maximized",
   "editor.minimap.enabled": false,
+  "workbench.activityBar.location": "hidden",
 }
