@@ -110,7 +110,7 @@ set wildmode=list:longest,full
 set showcmd
 
 "クリップボードの共有
-set clipboard=unnamed,autoselect
+set clipboard=unnamed
 
 "カーソル移動で行をまたげるようにする
 set whichwrap=b,s,h,l,<,>,~,[,]
@@ -173,18 +173,3 @@ map t <Plug>(easymotion-t)
 map F <Plug>(easymotion-F)
 map T <Plug>(easymotion-T)
 
-"ペースト時に自動インデントで崩れるのを防ぐ
-" if &term =~ "xterm"
-"     let &t_SI .= "\e[?2004h"
-"     let &t_EI .= "\e[?2004l"
-"     let &pastetoggle = "\e[201~"
-" 
-"     function XTermPasteBegin(ret)
-"         set paste
-"         return a:ret
-"     endfunction
-" 
-"     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
-" endif
-
-"filetype plugin indent on
