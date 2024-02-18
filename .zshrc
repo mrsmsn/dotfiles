@@ -1,25 +1,30 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export FZF_DEFAULT_OPTS="--reverse --border"
+## FIXME:何故か下記の環境変数を設定してもfzf-tmux側にデフォルトのオプションとして渡されないので解決する
+##       現状は各コマンドを呼ぶ際に"fzf-tmux -p -w80%"と冗長になっているが"fzf-tmux"だけでいい感じにするように直したい
+# export FZF_TMUX=1
+export FZF_TMUX_OPTS='-p80%,60%'
 
 ## エイリアス
 alias ll='lsd -al'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cal='jpcal'
+alias fk='fzf-kill'
 
 ## 関数
 
 ### ソース一覧に飛ぶやつ
 function fzf-src() {
-    local selected_dir=$(ghq list -p | fzf --reverse --query "$LBUFFER" --prompt="Repo >" )
+    local selected_dir=$(ghq list -p | fzf-tmux -p -w80% --query "$LBUFFER" --prompt="Repo >" --preview "lsd -a1 --color=always --icon=always {}" )
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
@@ -31,11 +36,16 @@ bindkey '^]' fzf-src
 
 ### fzfでhistory検索
 function select-history() {
-  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf -e --reverse  --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  BUFFER=$(history -n -r 1 | awk '!a[$0]++' | fzf-tmux -p -w80% -e --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
 zle -N select-history
 bindkey '^r' select-history
+
+### killするプロセスを選択
+function fzf-kill() {
+ kill `ps aux | fzf-tmux -p -w80% -e | awk '{print $2}'`
+}
 
 ##tmuxを自動で起動する奴
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
