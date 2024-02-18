@@ -31,7 +31,7 @@ bindkey '^]' fzf-src
 
 ### fzfでhistory検索
 function select-history() {
-  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf --reverse  --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf -e --reverse  --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
 zle -N select-history
