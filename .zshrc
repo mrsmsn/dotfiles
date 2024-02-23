@@ -19,6 +19,7 @@ alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cal='jpcal'
 alias fk='fzf-kill'
+alias docker='lima nerdctl'
 
 ## 関数
 
@@ -36,7 +37,7 @@ bindkey '^]' fzf-src
 
 ### fzfでhistory検索
 function select-history() {
-  BUFFER=$(history -n -r 1 | awk '!a[$0]++' | fzf-tmux -p -w80% -e --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  BUFFER=$(history -n -r 1 | awk '!a[$0]++' | fzf-tmux -p -w80% -e --no-sort +m --query "$LBUFFER" --prompt="History > " | sed 's/\\n/\n/g')
   CURSOR=$#BUFFER
 }
 zle -N select-history
