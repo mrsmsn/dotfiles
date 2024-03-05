@@ -2,8 +2,9 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
-config.window_background_opacity = 0.70
+config.window_background_opacity = 0.75
 config.hide_tab_bar_if_only_one_tab = true
+config.audible_bell = "Disabled"
 config.font = wezterm.font("HackGen Console NF", {weight="Regular", stretch="Normal", style="Normal"})
 
 -- Fullscreen start
