@@ -14,7 +14,7 @@ export FZF_DEFAULT_OPTS="--reverse --border"
 export FZF_TMUX_OPTS='-p80%,60%'
 
 ## エイリアス
-alias ll='lsd -al'
+alias ll='lsd -al --group-directories-first'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cal='jpcal'
@@ -25,9 +25,9 @@ alias docker='lima nerdctl'
 
 ### ソース一覧に飛ぶやつ
 function fzf-src() {
-    local selected_dir=$(ghq list -p | fzf-tmux -p -w80% --query "$LBUFFER" --prompt="Repo >" --preview "lsd -a1 --color=always --icon=always {}" )
+    local selected_dir=$(ghq list | fzf-tmux -p -w80% --query "$LBUFFER" --prompt="Repo >" --preview "lsd -1A --group-directories-first $(ghq root)/{}/ --color=always --icon=always" )
     if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
+        BUFFER="cd $(ghq root)/${selected_dir}"
         zle accept-line
     fi
     zle clear-screen
