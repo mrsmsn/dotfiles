@@ -7,6 +7,7 @@ source $ZSH/oh-my-zsh.sh
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export GPG_TTY=$(tty)
 export FZF_DEFAULT_OPTS="--reverse --border"
 ## FIXME:何故か下記の環境変数を設定してもfzf-tmux側にデフォルトのオプションとして渡されないので解決する
 ##       現状は各コマンドを呼ぶ際に"fzf-tmux -p -w80%"と冗長になっているが"fzf-tmux"だけでいい感じにするように直したい
