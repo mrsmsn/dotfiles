@@ -5,6 +5,7 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+export XDG_CONFIG_HOME=$HOME/.config
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GPG_TTY=$(tty)
