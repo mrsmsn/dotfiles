@@ -36,64 +36,75 @@ local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    local background = "#5c6d74"
-    local foreground = "#FFFFFF"
-    local edge_background = "none"
-    if tab.is_active then
-        background = "#1016c0"
-        foreground = "#FFFFFF"
-    end
-    local edge_foreground = background
-    local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
-    return {{
-        Background = {
-            Color = edge_background
-        }
-    }, {
-        Foreground = {
-            Color = edge_foreground
-        }
-    }, {
-        Text = SOLID_LEFT_ARROW
-    }, {
-        Background = {
-            Color = background
-        }
-    }, {
-        Foreground = {
-            Color = foreground
-        }
-    }, {
-        Text = title
-    }, {
-        Background = {
-            Color = edge_background
-        }
-    }, {
-        Foreground = {
-            Color = edge_foreground
-        }
-    }, {
-        Text = SOLID_RIGHT_ARROW
-    }}
+	local background = "#5c6d74"
+	local foreground = "#FFFFFF"
+	local edge_background = "none"
+	if tab.is_active then
+		background = "#1016c0"
+		foreground = "#FFFFFF"
+	end
+	local edge_foreground = background
+	local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+	return {
+		{
+			Background = {
+				Color = edge_background,
+			},
+		},
+		{
+			Foreground = {
+				Color = edge_foreground,
+			},
+		},
+		{
+			Text = SOLID_LEFT_ARROW,
+		},
+		{
+			Background = {
+				Color = background,
+			},
+		},
+		{
+			Foreground = {
+				Color = foreground,
+			},
+		},
+		{
+			Text = title,
+		},
+		{
+			Background = {
+				Color = edge_background,
+			},
+		},
+		{
+			Foreground = {
+				Color = edge_foreground,
+			},
+		},
+		{
+			Text = SOLID_RIGHT_ARROW,
+		},
+	}
 end)
 
--- Fullscreen start
--- local mux = wezterm.mux
--- wezterm.on("gui-startup", function(cmd)
---     local tab, pane, window = mux.spawn_window(cmd or {})
---     window:gui_window():toggle_fullscreen()
--- end)
--- Center Window Start for 4k
 wezterm.on("gui-startup", function(cmd)
 	local screen = wezterm.gui.screens().main
-	local width_ratio = 0.5
-	local height_ratio = 0.7
-	local width, height = screen.width * width_ratio, screen.height * height_ratio
-	local tab, pane, window = wezterm.mux.spawn_window(cmd or {
-		position = { x = (screen.width - width) / 2 - 10, y = (screen.height - height) / 2 },
-	})
-	window:gui_window():set_inner_size(width, height)
+	local mux = wezterm.mux
+	if screen.width > 3800 then
+		-- Window Start for 4k
+		local width_ratio = 0.5
+		local height_ratio = 0.7
+		local width, height = screen.width * width_ratio, screen.height * height_ratio
+		local tab, pane, window = mux.spawn_window(cmd or {
+			position = { x = (screen.width - width) / 2 - 10, y = (screen.height - height) / 1.2 },
+		})
+		window:gui_window():set_inner_size(width, height)
+	else
+		-- Fullscreen start
+		local tab, pane, window = mux.spawn_window(cmd or {})
+		window:gui_window():toggle_fullscreen()
+	end
 end)
 
 -- Shortcut keys
