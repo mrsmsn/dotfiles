@@ -68,11 +68,14 @@
   "vim.easymotion": true,
   "vim.visualstar": true,
   "vim.useCtrlKeys": true,
-  "workbench.colorTheme": "Sapphire (Dim)",
+  "workbench.colorTheme": "One Monokai",
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "window.newWindowDimensions": "maximized",
   "editor.minimap.enabled": false,
-  "workbench.activityBar.location": "hidden",
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
 }
