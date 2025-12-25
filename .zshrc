@@ -1,15 +1,19 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export GPG_TTY=$(tty)
 ZSH_THEME="robbyrussell"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
 export XDG_CONFIG_HOME=$HOME/.config
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GPG_TTY=$(tty)
 export FZF_DEFAULT_OPTS="--reverse --border"
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 ## FIXME:何故か下記の環境変数を設定してもfzf-tmux側にデフォルトのオプションとして渡されないので解決する
 ##       現状は各コマンドを呼ぶ際に"fzf-tmux -p -w80%"と冗長になっているが"fzf-tmux"だけでいい感じにするように直したい
 # export FZF_TMUX=1
@@ -17,6 +21,7 @@ export FZF_TMUX_OPTS='-p80%,60%'
 
 ## エイリアス
 alias ll='lsd -al --group-directories-first'
+alias l='lsd -a1 --group-directories-first'
 alias chrome='open -a google\ chrome'
 alias lg='lazygit'
 alias cal='jpcal'
