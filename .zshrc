@@ -27,21 +27,26 @@ alias lg='lazygit'
 alias cal='jpcal'
 alias fk='fzf-kill'
 alias docker='lima nerdctl'
+alias vim='nvim'
+alias vi='nvim'
+# リポジトリページをブラウザで開くエイリアス
+alias gb='open $(git config --get remote.origin.url | sed -e "s|git@github.com:|https://github.com/|" -e "s|\.git$||")'
 
 ## 関数
 
 ### ソース一覧に飛ぶやつ
 function fzf-src() {
 ### ghq.rootを複数設定している場合に対応するため、-pオプションを使用している。一方でghq list -pでフルパスがpreview表示されるとうざいのsedで加工
-    local selected_dir=$(ghq list -p | sed -e  "s#$(echo $HOME)#$HOME#" | fzf-tmux -p -w80% --query "$LBUFFER" --prompt="Repo >" --preview "lsd -1A --group-directories-first --color=always --icon=always {}" )
+    local selected_dir=$(ghq list -p | sed "s|^${HOME}/src/||" | fzf-tmux -p -w80% --query "$LBUFFER" --prompt="Repo >" --preview "lsd -1A --group-directories-first --color=always --icon=always {}" )
     if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
+        BUFFER="cd $(ghq root)/${selected_dir}"
         zle accept-line
     fi
     zle clear-screen
 }
 zle -N fzf-src
-bindkey '^]' fzf-src
+# 実際のキーバイドは ^/ となる
+bindkey '^_' fzf-src
 
 ### fzfでhistory検索
 function select-history() {
